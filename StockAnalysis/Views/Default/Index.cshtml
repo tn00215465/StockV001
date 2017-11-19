@@ -45,7 +45,7 @@
                         { 'CompanyName': '谷哥', 'BeginDate': '2017', 'EndDate': '2018', 'Url': 'https://app.powerbi.com/view?r=eyJrIjoiZGE2YzIxNTQtZTI3Yy00ZjI5LTlmMzEtNDA3OGIxZWM2ZWU4IiwidCI6IjY1YmY5OWVjLWU0NjEtNGJlMS05ZTYwLTA0NjRmZWY3ZTQ3ZSJ9' },
                         { 'CompanyName': 'microsoft', 'BeginDate': '2017', 'EndDate': '2018', 'Url': 'https://app.powerbi.com/view?r=eyJrIjoiZDEyMjBmNGItYzJkZS00OWUwLTg0NzItMGEzYTlmYjQyZmZmIiwidCI6IjY1YmY5OWVjLWU0NjEtNGJlMS05ZTYwLTA0NjRmZWY3ZTQ3ZSJ9' },
                         { 'CompanyName': 'ACER', 'BeginDate': '2017', 'EndDate': '2018', 'Url': 'https://app.powerbi.com/view?r=eyJrIjoiM2I0NmVhZTYtN2M3ZS00OGFmLWIyMzMtYWJiODk3Y2E3YzdkIiwidCI6IjY1YmY5OWVjLWU0NjEtNGJlMS05ZTYwLTA0NjRmZWY3ZTQ3ZSJ9' },
-                        { 'CompanyName': 'Apple', 'BeginDate': '2017', 'EndDate': '2018', 'Url': 'https://app.powerbi.com/view?r=eyJrIjoiNDkzYjJlOWMtZWEzMy00MDEyLWJmNmEtMTgzNjY2MmU1MjNiIiwidCI6IjY1YmY5OWVjLWU0NjEtNGJlMS05ZTYwLTA0NjRmZWY3ZTQ3ZSJ9' },
+                        { 'CompanyName'1608022: 'Apple', 'BeginDate': '2017', 'EndDate': '2018', 'Url': 'https://app.powerbi.com/view?r=eyJrIjoiNDkzYjJlOWMtZWEzMy00MDEyLWJmNmEtMTgzNjY2MmU1MjNiIiwidCI6IjY1YmY5OWVjLWU0NjEtNGJlMS05ZTYwLTA0NjRmZWY3ZTQ3ZSJ9' },
                         { 'CompanyName': 'google', 'BeginDate': '2017', 'EndDate': '2018', 'Url': 'https://app.powerbi.com/view?r=eyJrIjoiZGE2YzIxNTQtZTI3Yy00ZjI5LTlmMzEtNDA3OGIxZWM2ZWU4IiwidCI6IjY1YmY5OWVjLWU0NjEtNGJlMS05ZTYwLTA0NjRmZWY3ZTQ3ZSJ9' }
                     ];
                     $.each(urlArray, function (i, v) {
@@ -56,33 +56,7 @@
                         }
                     });
                     $('#report').attr("src", url);
-                    //console.log(response.entities.length)
-                    //if (response.entities.length == 2)
-                    //{
-                        
-                    //} else {
-                    //    errorMsg = "if intent = 'None' post('倫加看不懂啦')";
-                    //    $('#errorMsg').text(errorMsg);  
-                    //} 
                 }
-                //success: function (response) {
-                //    //var companyName = response.entities[0].entity;
-                //    //var beginDate = (response.entities[1].entity).split('-')[0];
-                //    //var endDate = (response.entities[1].entity).split('-')[1];
-                //    //var url = 'https://app.powerbi.com/groups/me/reports/7df042d2-3154-43f6-b1a8-167278e3b088/ReportSection';
-                //    //var urlArray = [
-                //    //    { 'CompanyName': '微軟', 'FilterName': 'MSFT' },
-                //    //];
-                //    //$.each(urlArray, function (i, v) {
-                //    //    if (companyName === v.CompanyName) {
-                //    //        companyName = v.FilterName;
-                //    //    }
-                //    //});
-                //    //var filter = '?filter=StockAnalysis_BBands_String~2FCompany%20eq%20%27' + companyName + '%27';
-                //    //url += filter;
-                //    //console.log(url);
-                //    //$('#report').attr("src", "https://app.powerbi.com/groups/me/reports/7df042d2-3154-43f6-b1a8-167278e3b088/ReportSection?filter=StockAnalysis_BBands_String~2FCompany%20eq%20%27MSFT%27");
-                //}
             });
         })
     }(jQuery));
