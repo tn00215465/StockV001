@@ -1,0 +1,93 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>StockAnalysis</h2>
+
+<form>
+    <div class="form-group">
+        <label>查詢語句</label>
+        <input type="text" id="Key" value="" class="form-control" placeholder="Text input" />
+    </div>
+    <div class="form-group">
+        <input type="button" id="Query" value="查詢" class="btn btn-default" />
+    </div>
+    <div class="form-group">
+        <label id="errorMsg"></label>
+    </div>
+    <iframe width="800" height="600" id="report" frameborder="0" allowFullScreen="true"></iframe>
+</form>
+
+<script>
+
+    (function ($) {
+        $('#Query').click(function () {
+            var keyWork = $('#Key').val();
+            var luisURL = 'https://westus.api.cognitive.microsoft.com/luis/v2.0/apps/4d073619-3a5c-4441-94bf-e026ae9baf67?subscription-key=e418edb5ee774da88fb831317bfde928&verbose=true&timezoneOffset=0&q=' + keyWork;
+            $.ajax({
+                url: luisURL,
+                type: 'GET',
+                data: {
+                },
+                error: function (xhr) {
+                },
+                success: function (response) {
+                    var errorMsg;
+                    var companyName = response.entities[0].entity;
+                    var beginDate = (response.entities[1].entity).split('-')[0];
+                    var endDate = (response.entities[1].entity).split('-')[1];
+                    var url;
+                    var urlArray = [
+                        { 'CompanyName': '微軟', 'BeginDate': '2017', 'EndDate': '2018', 'Url': 'https://app.powerbi.com/view?r=eyJrIjoiZDEyMjBmNGItYzJkZS00OWUwLTg0NzItMGEzYTlmYjQyZmZmIiwidCI6IjY1YmY5OWVjLWU0NjEtNGJlMS05ZTYwLTA0NjRmZWY3ZTQ3ZSJ9' },
+                        { 'CompanyName': '宏碁', 'BeginDate': '2017', 'EndDate': '2018', 'Url': 'https://app.powerbi.com/view?r=eyJrIjoiM2I0NmVhZTYtN2M3ZS00OGFmLWIyMzMtYWJiODk3Y2E3YzdkIiwidCI6IjY1YmY5OWVjLWU0NjEtNGJlMS05ZTYwLTA0NjRmZWY3ZTQ3ZSJ9' },
+                        { 'CompanyName': '蘋果', 'BeginDate': '2017', 'EndDate': '2018', 'Url': 'https://app.powerbi.com/view?r=eyJrIjoiNDkzYjJlOWMtZWEzMy00MDEyLWJmNmEtMTgzNjY2MmU1MjNiIiwidCI6IjY1YmY5OWVjLWU0NjEtNGJlMS05ZTYwLTA0NjRmZWY3ZTQ3ZSJ9' },
+                        { 'CompanyName': '谷哥', 'BeginDate': '2017', 'EndDate': '2018', 'Url': 'https://app.powerbi.com/view?r=eyJrIjoiZGE2YzIxNTQtZTI3Yy00ZjI5LTlmMzEtNDA3OGIxZWM2ZWU4IiwidCI6IjY1YmY5OWVjLWU0NjEtNGJlMS05ZTYwLTA0NjRmZWY3ZTQ3ZSJ9' },
+                        { 'CompanyName': 'microsoft', 'BeginDate': '2017', 'EndDate': '2018', 'Url': 'https://app.powerbi.com/view?r=eyJrIjoiZDEyMjBmNGItYzJkZS00OWUwLTg0NzItMGEzYTlmYjQyZmZmIiwidCI6IjY1YmY5OWVjLWU0NjEtNGJlMS05ZTYwLTA0NjRmZWY3ZTQ3ZSJ9' },
+                        { 'CompanyName': 'ACER', 'BeginDate': '2017', 'EndDate': '2018', 'Url': 'https://app.powerbi.com/view?r=eyJrIjoiM2I0NmVhZTYtN2M3ZS00OGFmLWIyMzMtYWJiODk3Y2E3YzdkIiwidCI6IjY1YmY5OWVjLWU0NjEtNGJlMS05ZTYwLTA0NjRmZWY3ZTQ3ZSJ9' },
+                        { 'CompanyName': 'Apple', 'BeginDate': '2017', 'EndDate': '2018', 'Url': 'https://app.powerbi.com/view?r=eyJrIjoiNDkzYjJlOWMtZWEzMy00MDEyLWJmNmEtMTgzNjY2MmU1MjNiIiwidCI6IjY1YmY5OWVjLWU0NjEtNGJlMS05ZTYwLTA0NjRmZWY3ZTQ3ZSJ9' },
+                        { 'CompanyName': 'google', 'BeginDate': '2017', 'EndDate': '2018', 'Url': 'https://app.powerbi.com/view?r=eyJrIjoiZGE2YzIxNTQtZTI3Yy00ZjI5LTlmMzEtNDA3OGIxZWM2ZWU4IiwidCI6IjY1YmY5OWVjLWU0NjEtNGJlMS05ZTYwLTA0NjRmZWY3ZTQ3ZSJ9' }
+                    ];
+                    $.each(urlArray, function (i, v) {
+                        if (companyName === v.CompanyName && beginDate === v.BeginDate && endDate === v.EndDate) {
+                            console.log("test");
+                            console.log(v.Url);
+                            url = v.Url;
+                        }
+                    });
+                    $('#report').attr("src", url);
+                    //console.log(response.entities.length)
+                    //if (response.entities.length == 2)
+                    //{
+                        
+                    //} else {
+                    //    errorMsg = "if intent = 'None' post('倫加看不懂啦')";
+                    //    $('#errorMsg').text(errorMsg);  
+                    //} 
+                }
+                //success: function (response) {
+                //    //var companyName = response.entities[0].entity;
+                //    //var beginDate = (response.entities[1].entity).split('-')[0];
+                //    //var endDate = (response.entities[1].entity).split('-')[1];
+                //    //var url = 'https://app.powerbi.com/groups/me/reports/7df042d2-3154-43f6-b1a8-167278e3b088/ReportSection';
+                //    //var urlArray = [
+                //    //    { 'CompanyName': '微軟', 'FilterName': 'MSFT' },
+                //    //];
+                //    //$.each(urlArray, function (i, v) {
+                //    //    if (companyName === v.CompanyName) {
+                //    //        companyName = v.FilterName;
+                //    //    }
+                //    //});
+                //    //var filter = '?filter=StockAnalysis_BBands_String~2FCompany%20eq%20%27' + companyName + '%27';
+                //    //url += filter;
+                //    //console.log(url);
+                //    //$('#report').attr("src", "https://app.powerbi.com/groups/me/reports/7df042d2-3154-43f6-b1a8-167278e3b088/ReportSection?filter=StockAnalysis_BBands_String~2FCompany%20eq%20%27MSFT%27");
+                //}
+            });
+        })
+    }(jQuery));
+
+    
+</script>
+
+
